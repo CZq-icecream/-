@@ -1,0 +1,20 @@
+body{
+    height: 850px;
+    overflow-y: scroll;
+}
+.side{
+    float: left;
+    width: 20%;
+    height: 100%;
+    background-color: lightskyblue;
+}
+
+.side h1{
+    color: white;
+    text-align: center;
+}
+
+.main{
+    float: left;
+    padding-left: 25px;
+}
