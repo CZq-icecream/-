@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>两栏布局</title>
+    <style>
+        header{
+            background-color: green;
+            margin-bottom: 5px;
+        }
+        .main1{
+            border: 1px solid black;
+            height: 100%;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            background-color:cadetblue;
+            /* overflow: hidden; */
+        }
+        .clearfix1:after{
+            content: '';
+            display: table;
+            clear: both;
+        }
+        .left1{
+            width: 30%;
+            background-color: aqua;
+            float: left;
+        }
+        .right1{
+            width: 70%;
+            background-color: bisque;
+            float: left;
+        }
+    </style>
+
+    <style>
+        .main2{
+            position: relative;
+            border: 1px solid black;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            background-color:cadetblue;
+            height: 400px;
+        }
+        .left2{
+            position: absolute;
+            left: 0;
+            right: 70%;
+            background-color: aqua;
+            margin-left: 0;
+            margin-right: 0;
+        }
+        .right2{
+            position: absolute;
+            left: 30%;
+            right: 0;
+            background-color: bisque;
+            margin-left: 0;
+            margin-right: 0;
+        }
+    </style>
+        
+    <style>
+        .main3{
+            display: flex;
+            flex-direction: row;
+            background-color: cadetblue;
+        }
+        .left3{
+            flex: 3;
+            background-color: aqua;
+        }
+        .right3{
+            flex: 7;
+            background-color: bisque;
+        }
+    </style>
+</head>
+<body>
+    <h1>两栏布局，左侧占30%，右侧占70%</h1>
+    
+    <header>用float实现方式如下</header>
+    <div class="main1 clearfix1">
+        <div>
+<pre>
+    .main{
+        border: 1px solid black;
+        height: 100%;
+        margin-top: 5px;
+        margin-bottom: 15px;
+        background-color:cadetblue;
+    }
+    .clearfix:after{
+        content: '';
+        display: table;
+        clear: both;
+    }
+</pre>
+        </div>
+        <div class="left1">
+        <p>这是左侧布局，占30%</p>
+<pre>
+    .left{
+        width: 30%;
+        background-color: aqua;
+        float: left;
+    }
+</pre>
+        </div>
+        <div class="right1">
+            <p>这是右侧布局，占70%</p>
+<pre>
+    .left{
+        width: 70%;
+        background-color: bisque;
+        float: left;
+    }
+</pre>
+        </div>
+    </div>
+
+    <header>用position实现方式如下，我感觉是这种情况下无法得知子元素的高度，所以必须预先设置一个高度才能囊括子元素</header>
+    <div class="main2 clearfix2">
+<pre>
+    .main2{
+        position: relative;
+        border: 1px solid black;
+        margin-top: 5px;
+        margin-bottom: 15px;
+        background-color:cadetblue;
+        height: 400px;
+    }
+</pre>
+        <div class="left2">
+            <p>这是左侧布局，占30%</p>
+<pre>
+    .left2{
+        position: absolute;
+        left: 0;
+        right: 70%;
+        background-color: aqua;
+        margin-left: 0;
+        margin-right: 0;
+    }
+</pre>
+        </div>
+        <div class="right2">
+            <p>这是右侧布局，占70%</p>
+<pre>
+    .right2{
+        position: absolute;
+        left: 30%;
+        right: 0;
+        background-color: bisque;
+        margin-left: 0;
+        margin-right: 0;
+    }
+</pre>
+        </div>
+    </div>
+
+    <header>用flex实现方式如下</header>
+    <div class="main3">
+        <div class="left3">
+<pre>
+    .left3{
+        flex: 3;
+        background-color: aqua;
+    }
+</pre>
+            <p>这是左侧布局，占30%</p>
+        </div>
+        <div class="right3">
+<pre>
+    .right3{
+        flex: 7;
+        background-color: bisque;
+    }
+</pre>
+            <p>这是右侧布局，占70%</p>
+        </div>
+    </div>
+
+    
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Flexbox align 0 — starting code</title>
+    <style>
+      html {
+        font-family: sans-serif;
+      }
+
+      body {
+        width: 70%;
+        max-width: 960px;
+        margin: 20px auto;
+      }
+
+      button {
+        font-size: 18px;
+        line-height: 1.5;
+        width: 15%;
+      }
+
+      div {
+        height: 100px;
+        border: 1px solid black;
+      }
+
+      /* Add your flexbox CSS below here */
+      /* align-items控制flex项在交叉轴上的位置，默认值是stretch，会使所有的flex项沿着交叉轴的
+      方向拉伸以填充父容器。 */
+      div{
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+      }
+      /* align-self可以设置flex项在交叉轴的开始或结束处对齐的值 */
+      button:first-child{
+          align-self: flex-end;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div>
+      <button>Smile</button>
+      <button>Laugh</button>
+      <button>Wink</button>
+      <button>Shrug</button>
+      <button>Blush</button>
+    </div>
+  </body>
+</html>

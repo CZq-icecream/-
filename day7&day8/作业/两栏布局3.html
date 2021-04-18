@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>两栏布局3</title>
+    <style>
+        header{
+            background-color: green;
+            margin-bottom: 5px;
+        }
+    </style>
+    <style>
+        .main1{
+            border: 1px solid black;
+            height: 100%;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            background-color:cadetblue;
+        }
+        .clearfix1:after{
+            content: '';
+            display: table;
+            clear: both;
+        }
+        .left1{
+            float: left;
+            background-color: aqua;
+            width: calc(100% - 300px);
+        }
+        .right1{
+            float: right;
+            width: 300px;
+            background-color: bisque;
+        }
+    </style>
+    <style>
+        .main2{
+            position: relative;
+            border: 1px solid black;
+            background-color:cadetblue;
+            height: 200px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+        }
+        .left2{
+            background-color: aqua;
+            position: relative;
+            left: 0px;
+            top: 0px;
+        }
+        .right2{
+            background-color: bisque;
+            position: absolute;
+            right: 0px;
+            top: 0px;
+            width: 300px
+        }
+    </style>
+    <style>
+        .main3{
+            background-color: cadetblue;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            display: flex;
+        }
+        .left3{
+            flex: 1;
+            background-color: aqua;
+        }
+        .right3{
+            width: 300px;
+            background-color: bisque;
+        }
+    </style>
+</head>
+<body>
+    <h1>实现一个两栏布局，右侧固定宽度，左侧根据浏览器宽度进行自适应变化</h1>
+
+    <header>用float实现方式如下</header>
+    <div class="main1 clearfix1">
+        <div class="left1">
+            <p>这是左侧布局，随浏览器宽度自适应变化</p>
+        </div>
+        <div class="right1">
+            <p>这是右侧布局，占300px</p>
+        </div>
+    </div>
+
+    <header>用position实现方式如下</header>
+    <div class="main2">
+        <div class="left2">
+            <p>这是左侧布局，随浏览器宽度自适应变化</p>
+        </div>
+        <div class="right2">
+            <p>这是右侧布局，占300px</p>
+        </div>
+    </div>
+
+    <header>用flex实现的方式如下</header>
+    <div class="main3">
+        <div class="left3">
+            <p>这是左侧布局，随浏览器宽度自适应变化</p>
+        </div>
+        <div class="right3">
+            <p>这是右侧布局，占300px</p>
+        </div>
+    </div>
+</body>
+</html>

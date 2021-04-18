@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>三栏布局2</title>
+    <style>
+        header{
+            background-color: green;
+            margin-bottom: 5px;
+        }
+    </style>
+    <style>
+        .container1{
+            background-color: cadetblue;
+            border: 1px solid black;
+            margin-top: 5px;
+            margin-bottom: 15px;
+        }
+        .clearfix1:after{
+            content: '';
+            display: table;
+            clear: both;
+        }
+        .left1{
+            background-color: aqua;
+            width: 100px;
+            float: left;
+        }
+        .middle1{
+            background-color: burlywood;;
+            width: 100px;
+            float: left;
+        }
+        .right1{
+            background-color: bisque;
+            float: right;
+            width: calc(100% - 200px);
+        }
+    </style>
+    <style>
+        .container2{
+            background-color: cadetblue;
+            border: 1px solid black;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            position: relative;
+            height: 100px;
+        }
+        .left2{
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 100px;
+            background-color: aqua;
+        }
+        .middle2{
+            position: absolute;
+            top: 0px;
+            left: 100px;
+            width: 100px;
+            background-color: burlywood;
+        }
+        .right2{
+            position: absolute;
+            top: 0px;
+            left: 200px;
+            width: calc(100% - 200px);
+            background-color: bisque;
+        }
+    </style>
+
+    <style>
+        .container3{
+            background-color: cadetblue;
+            border: 1px solid black;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            display: flex;
+        }
+        .left3{
+            width: 100px;
+            background-color: aqua;
+        }
+        .middle3{
+            width: 100px;
+            background-color: burlywood;
+        }
+        .right3{
+            width: calc(100% - 200px);
+            background-color: bisque;
+        }
+    </style>
+</head>
+<body>
+    <h1>实现一个三栏布局，左侧固定宽度，中间固定宽度，右侧根据浏览器宽度变化而自适应变化</h1>
+    <header>用float实现方式如下</header>    
+    <div class="container1 clearfix1">
+        <div class="left1">
+            <p>左侧固定宽度100px</p>
+        </div>
+        <div class="middle1">
+            <p>中间固定宽度100px</p>
+        </div>
+        <div class="right1">
+            <p>右侧宽度随浏览器宽度变化而自适应变化</p>
+        </div>
+    </div>
+
+    <header>用position实现方式如下</header>
+    <div class="container2">
+        <div class="left2">
+            <p>左侧固定宽度100px</p>
+        </div>
+        <div class="middle2">
+            <p>中间固定宽度100px</p>
+        </div>
+        <div class="right2">
+            <p>右侧宽度随浏览器宽度变化而自适应变化</p>
+        </div>
+    </div>
+
+    <header>用flex实现方式如下</header>
+    <div class="container3">
+        <div class="left3">
+            <p>左侧固定宽度100px</p>
+        </div>
+        <div class="middle3">
+            <p>中间固定宽度100px</p>
+        </div>
+        <div class="right3">
+            <p>右侧宽度随浏览器宽度变化而自适应变化</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>两栏布局</title>
+    <style>
+        header{
+            background-color: green;
+            margin-bottom: 5px;
+        }
+    </style>
+    <style>
+        .main1{
+            border: 1px solid black;
+            height: 100%;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            background-color:cadetblue;
+        }
+        .clearfix1:after{
+            content: '';
+            display: table;
+            clear: both;
+        }
+        .left1{
+            width: 300px;
+            float: left;
+            background-color: aqua;
+        }
+        .right1{
+            background-color: bisque;
+        }
+    </style>
+    <style>
+        .main2{
+            position: relative;
+            border: 1px solid black;
+            height: 200px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            background-color:cadetblue;
+            width: 100%;
+        }
+        .left2{
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            width: 300px;
+            background-color: aqua;
+        }
+        .right2{
+            position: relative;
+            background-color: bisque;
+            left: 300px;
+            right: 0px;
+        }
+    </style>
+    <style>
+        .main3{
+            border: 1px solid black;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            background-color:cadetblue;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        .left3{
+            width: 300px;
+            background-color: aqua;
+        }
+        .right3{
+            flex: 1;
+            background-color: bisque;
+        }
+    </style>
+</head>
+<body>
+    <h1>实现一个两栏布局，左侧固定宽度，右侧根据浏览器宽度进行自适应变化</h1>
+
+    <header>用float实现方式如下</header>
+    <div class="main1 clearfix1">
+<pre>
+    .main1{
+        background-color: cadetblue;
+        border: 1px solid black;
+    }
+    .clearfix1:after{
+        content: '';
+        display: table;
+        clear: both;
+    }
+</pre>    
+        <div class="left1">
+<pre>
+    .left1{
+        width: 300px;
+        float: left;
+        background-color: aqua;
+    }
+</pre>
+        <p>这是左侧布局，占300px</p>
+        </div>
+        <div class="right1">
+<pre>
+    .right1{
+        background-color: bisque;
+    }
+</pre>
+            <p>这是右侧布局，随浏览器宽度自适应变化</p>
+        </div>
+    </div>
+
+    <header>用position方式实现如下</header>
+    <div class="main2 clearfix2">
+        <div class="left2">
+<pre>
+    .left2{
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 300px;
+        background-color: aqua;
+    }
+</pre>
+            <p>这是左侧布局，占300px</p>
+        </div>
+        <div class="right2">
+<pre>
+    .right2{
+        position: relative;
+        background-color: bisque;
+        left: 300px;
+    }
+</pre>
+            <p>这是右侧布局，随浏览器宽度自适应变化</p>
+        </div>
+    </div>
+
+    <header>用flex实现方式如下</header>
+    <div class="main3">
+        <div class="left3">
+<pre>
+    .left3{
+        width: 300px;
+        background-color: aqua;
+    }
+</pre>
+            <p>这是左侧布局，占300px</p>
+        </div>
+        <div class="right3">
+<pre>
+    .right3{
+        flex: 1;
+        background-color: bisque;
+    }
+</pre>
+            <p>这是右侧布局，随浏览器宽度自适应变化</p>
+        </div>
+    </div>
+</body>
+</html>
