@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">    
+    <title>IFE ECMAScript</title>
+</head>
+<body>        
+    <input id="first-number" type="number" value="0" placeholder="第一个数字">
+    <input id="second-number" type="number" value="0" placeholder="第二个数字">
+    <button id="add-btn">加</button>
+    <button id="minus-btn">减</button>
+    <button id="times-btn">乘</button>
+    <button id="divide-btn">除</button>
+    <p id="result">运算结果</p>
+    <script>
+        const prefix = "运算结果: ";
+        const result = document.querySelector('p');
+
+        let addBtn = document.getElementById("add-btn");
+        addBtn.addEventListener('click', addFun);
+        function addFun(){
+            let firstNumber = document.getElementById("first-number").value;
+            let secondNumber = document.getElementById("second-number").value;
+            let addResult = Number(firstNumber) + Number(secondNumber);
+            result.innerHTML = prefix + addResult;
+        }
+
+        let minusBtn = document.getElementById("minus-btn");
+        minusBtn.addEventListener('click', minusFun);
+        function minusFun(){
+            let firstNumber = document.getElementById("first-number").value;
+            let secondNumber = document.getElementById("second-number").value;
+            let minusResult = firstNumber - secondNumber;
+            result.innerHTML = prefix + minusResult;
+        }
+
+        let timesBtn = document.getElementById("times-btn");
+        timesBtn.addEventListener('click', timesFun);
+        function timesFun(){
+            let firstNumber = document.getElementById("first-number").value;
+            let secondNumber = document.getElementById("second-number").value;
+            let timesResult = Number(firstNumber) * Number(secondNumber);
+            result.innerHTML = prefix + timesResult;
+        }
+
+        let divideBtn = document.getElementById("divide-btn");
+        divideBtn.addEventListener('click', divideFun);
+        function divideFun(){
+            let firstNumber = document.getElementById("first-number").value;
+            let secondNumber = document.getElementById("second-number").value;
+            let divideResult = Number(firstNumber) / Number(secondNumber);
+            result.innerHTML = prefix + divideResult;
+        }
+        
+    </script>
+</body>
+</html>
