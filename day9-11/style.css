@@ -1,0 +1,88 @@
+/* 通用属性 */
+/* 应用在整个界面 */
+*{
+    width: 90%;
+    margin: auto;
+}
+
+/* 设置内容居中 */
+/* father和son配套使用 */
+.display-center-father{
+    display: flex;
+}
+.display-center-son{
+    text-align: center;
+    vertical-align: middle;
+    width: 80%;
+    height: 50%;
+    margin: auto;
+}
+
+/* 自定义输入框设置 */
+input[type = text]:focus{
+    outline: 0;
+    color: white;
+}
+input{
+    border: none;
+    appearance: none;
+    background: none;
+    color: gray;
+}
+
+header{
+    background-image: url(images/header.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: 0 0, 0 0;
+    height: 990px;
+    width: 1600px;
+}
+
+.header-brief{
+    color: white;
+    font-size: 2em;
+    margin-bottom: 50px;
+}
+
+.header-box{
+    border: 1px solid gray;
+    color: white;
+    text-align: center;
+}
+
+.header-box h4{
+    padding-top: 25px;
+    padding-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.header-box p{
+    color: lightgray;
+    font-size: 0.8em;
+}
+
+.sign-up-box{
+    display: flex;
+    width: 75%;
+}
+
+.sign-up-box *{
+    height: 50px;
+    margin: 50px 25px 50px 25px;
+    font-size: 1.5em;
+}
+
+.sign-up-box input{
+    flex: 2;
+    border: 1px solid lightgray;
+}
+
+.sign-up-box button{
+    flex: 1;
+    font-size: 1em;
+}
+
+#features{
+    text-align: center;
+}
