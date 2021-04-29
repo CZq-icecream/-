@@ -29,6 +29,43 @@
     </header>
     <div id="features">
         <p><strong>BOATLOADS OF AWESOME</strong></p>
+        <h1>Ready-made, customizable, HTML landing page sections</h1>
+        <div class="feature-detail">
+            <div class="feature-content">
+                <img src="./images/mobile.png">
+                <h4>Mobile First</h4>
+                <p>All modulz are built mobile-first for maximum</p>
+            </div>
+            <div class="feature-content">
+                <img src="./images/accessibility.png">
+                <h4>Accessibility</h4>
+                <p>Support for IE8, mobile and tablet devices, screenreaders and color
+                    blind.</p>
+            </div>
+            <div class="feature-content">
+                <img src="./images/fluid.png">
+                <h4>Fluid Typography</h4>
+                <p>On different screen sizes, fonts automagically scale with the 
+                    viewport</p>
+            </div>
+            <div class="feature-content">
+                <img src="./images/customization.png">
+                <h4>Cusomization</h4>
+                <p>Make any design your own using the Style Editor. Personalize fonts, 
+                    colors, and layouts to create the custom look you want.
+                </p>
+            </div>
+        </div>
     </div>
+    <script>
+        window.onload = function(){
+            window.scroll({
+                top: document.body.clientHeight,
+                left: 0,
+                behavior: 'smooth'
+            });
+            console.log('refresh');
+        }
+    </script>
 </body>
 </html>

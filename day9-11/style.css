@@ -85,4 +85,43 @@ header{
 
 #features{
     text-align: center;
+    font-size: 1.5em;
+}
+
+#features > p{
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+
+#features h1{
+    width: 50%;
+}
+
+.feature-detail{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.feature-detail img{
+    float: left;
+    width: 50px;
+    vertical-align: middle;
+}
+
+.feature-content{
+    flex: 1;
+    flex-grow: 1;
+    flex-basis: 50%;
+    text-align: left;
+    margin: 50px 0px 25px 0px;
+}
+
+.feature-content h4{
+    padding: 0px 0px 25px 50px;
+}
+
+.feature-content p{
+    padding: 0px 0px 25px 50px;
+    color: gray;
 }
