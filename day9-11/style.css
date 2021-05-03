@@ -19,15 +19,21 @@
 }
 
 /* 自定义输入框设置 */
-input[type = text]:focus{
+/* input[type = text]:focus{
     outline: 0;
     color: white;
-}
-input{
+} */
+/* input{
     border: none;
-    appearance: none;
     background: none;
     color: gray;
+} */
+
+/* 闭合浮动 */
+.clearfix::after{
+    content: '';
+    display: table;
+    clear: both;
 }
 
 header{
@@ -74,6 +80,9 @@ header{
 }
 
 .sign-up-box input{
+    border: none;
+    background: none;
+    color: gray;
     flex: 2;
     border: 1px solid lightgray;
 }
@@ -81,6 +90,11 @@ header{
 .sign-up-box button{
     flex: 1;
     font-size: 1em;
+}
+
+.sign-up-box input[type = text]:focus{
+    outline: 0;
+    color: white;
 }
 
 #features{
@@ -124,4 +138,335 @@ header{
 .feature-content p{
     padding: 0px 0px 25px 50px;
     color: gray;
+}
+
+.data{
+    background-image: url(images/data-background.png);
+    background-size: 1600px 800px;
+    background-position: left top;
+    background-repeat: no-repeat;
+    width: 1600px;
+    height: 800px;
+    position: relative;
+}
+
+.data img{
+    position: absolute;
+    display: inline-block;
+    border: 1px solid lightgray;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    padding: 25px 0px 25px 40px;
+    right: 0px;
+    top: calc((800px - 542px - 25px - 25px) / 2); 
+    width: 585px;
+    height: 542px;
+}
+
+.data-content{
+    position: absolute;
+    color: white;
+    left: 100px;
+    top: calc((800px - 542px - 25px - 25px) / 2);
+    width: calc((1600px - 585px - 40px - 100px) / 2);
+}
+
+.data-title{
+    text-align: left;
+    font-size: 2em;
+    padding: 50px 0px 25px 0px;
+}
+
+.data-content p{
+    color: lightgray;
+    padding: 0px 0px 25px 0px;
+    text-align: left;
+}
+
+.data-content button{
+    outline: 0;
+    width: 200px;
+    height: 50px;
+    border: 1px solid lightgray;
+    background: none;
+    color: white;
+    margin-left: 10px;
+}
+
+button:hover{
+    background-color: white;
+    color: black;
+}
+
+.try-product{
+    text-align: center;
+    font-size: 1.5em;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.try-product h1{
+    margin: 50px;
+}
+
+.products{
+    display: flex;
+}
+
+.products div{
+    flex: 1;
+    margin: 25px;
+}
+
+.products h2{
+    margin: 25px;
+    line-height: 1.5em;
+    height: 50px;
+}
+
+.products p{
+    color: lightgray;
+}
+
+.singleton{
+    font-family: monospace;
+}
+
+.hero{
+    font-family: cursive;
+}
+
+.pontland{
+    font-family: Impact;
+}
+
+hr{
+    color: lightgray;
+    margin-top: 50px;
+    margin-bottom: 50px;;
+}
+
+.leaf{
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+
+.leaf img{
+    width: 50%;
+    float: left;
+}
+
+.leaf-introduce{
+    width: 40%;
+    float: right;
+    margin-top: 50px;
+    font-size: 1.5em;
+}
+
+.leaf-introduce h3{
+    margin-bottom: 25px;
+}
+
+.leaf-introduce p{
+    color: gray;
+}
+
+.bird{
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.bird img{
+    width: 50%;
+    float: right;
+}
+
+.bird-introduce{
+    width: 40%;
+    float: left;
+    margin-top: 50px;
+    font-size: 1.5em;
+}
+
+.bird-introduce h3{
+    margin-bottom: 25px;
+}
+
+.bird-introduce p{
+    color: gray;
+}
+
+.crew{
+    text-align: center;
+    width: 80%;
+    font-size: 1.5em;
+}
+
+.crew h1{
+    margin-top: 50px;
+    margin-bottom: 25px;
+}
+
+.crew p{
+    width: 60%;
+    color: gray;
+    margin-top: 25px;
+    margin-bottom: 50px;
+}
+
+.crew-pic{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.crew-detail{
+    flex: 1;
+    flex-basis: 50%;
+    margin-bottom: 25px;
+}
+
+.crew-detail img:hover{
+    background-color: black;
+}
+
+.contact{
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 30px;
+}
+
+.free-contact{
+    border: 1px solid lightgray;
+    width: 40%;
+    float: left;
+}
+
+.free-contact h3{
+    margin: 25px;
+}
+
+.free-contact input{
+    border: 1px solid gray;
+    background: none;
+    color: gray;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 75%;
+    height: 50px;
+}
+
+.free-contact textarea{
+    width: 75%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+    color: gray;
+}
+
+.free-contact button{
+    background-color: black;
+    color: white;
+    height: 50px;
+    width: 75%;
+    margin-bottom: 25px;
+}
+
+#message{
+    height: 150px;
+}
+
+.own-contact{
+    width: 30%;
+    margin-top: 100px;
+    margin-right: 20%;
+    text-align: left;
+}
+
+.own-contact > h1{
+    font-size: 3em;
+    margin-top: 50px;
+    margin-bottom: 25px;
+}
+
+.own-contact > p{
+    font-size: 1.5em;
+    margin-bottom: 25px;
+}
+
+.own-contact-method{
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
+    margin-left: 0px;
+}
+
+.own-contact-method img{
+    width: 25px;
+    float: left;
+    margin-left: 0px;
+}
+
+.own-contact-method div{
+    flex: 1;
+    flex-basis: 100%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.own-contact-method div p{
+    margin-left: 15%;
+}
+
+footer{
+    background-color: black;
+    color: gray;
+}
+
+.footer-container{
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+}
+
+.footer-container div{
+    flex: 1;
+    flex-basis: 20%;
+}
+
+.footer-container div p {
+    color: white;
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+
+.footer-container div ul{
+    color: gray;
+    padding-left: 0;
+    list-style: none;
+    margin-top: 25px;
+}
+
+.footer-container div ul li{
+    margin: 15px 0px 15px 0px;
+}
+
+.enjoy-your-life{
+    flex: 2;
+    flex-basis: 40%;
+}
+
+.enjoy-your-life img{
+    width: 20px;
+    height: 20px;
+    margin: 15px 15px 15px 0px;
+}
+
+.enjoy-your-life p{
+    color: gray;
+}
+
+.enjoy-your-life > p{
+    color: white;
 }
