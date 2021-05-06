@@ -13,7 +13,76 @@
     <button id="divide-btn">除</button>
     <p id="result">运算结果</p>
     <script>
+        const prefix = "运算结果: ";
+        const result = document.querySelector('p');
 
+        let addBtn = document.getElementById("add-btn");
+        addBtn.addEventListener('click', addFun);
+        function addFun(){
+            let firstNumber = document.getElementById("first-number").value;
+            let secondNumber = document.getElementById("second-number").value;
+            let msg = testError('+', firstNumber, secondNumber);
+            if (msg == null){
+                let addResult = Number(firstNumber) + Number(secondNumber);
+                result.innerHTML = prefix + addResult;
+            }else{
+                console.log(msg);
+            }
+        }
+
+        let minusBtn = document.getElementById("minus-btn");
+        minusBtn.addEventListener('click', minusFun);
+        function minusFun(){
+            let firstNumber = document.getElementById("first-number").value;
+            let secondNumber = document.getElementById("second-number").value;
+            let msg = testError('-', firstNumber, secondNumber);
+            if (msg == null){
+                let minusResult = firstNumber - secondNumber;
+                result.innerHTML = prefix + minusResult;
+            }else{
+                console.log(msg);
+            }
+        }
+
+        let timesBtn = document.getElementById("times-btn");
+        timesBtn.addEventListener('click', timesFun);
+        function timesFun(){
+            let firstNumber = document.getElementById("first-number").value;
+            let secondNumber = document.getElementById("second-number").value;
+            let msg = testError('*', firstNumber, secondNumber);
+            if (msg == null){
+                let timesResult = Number(firstNumber) * Number(secondNumber);
+                result.innerHTML = prefix + timesResult;
+            }else{
+                console.log(msg);
+            }
+        }
+
+        let divideBtn = document.getElementById("divide-btn");
+        divideBtn.addEventListener('click', divideFun);
+        function divideFun(){
+            let firstNumber = document.getElementById("first-number").value;
+            let secondNumber = document.getElementById("second-number").value;
+            let msg = testError('/', firstNumber, secondNumber);
+            if (msg == null){
+                let divideResult = Number(firstNumber) / Number(secondNumber);
+                result.innerHTML = prefix + divideResult;
+            }else{
+                console.log(msg);
+            }
+        }
+
+        function testError(opr, num1, num2){
+            let pattern = /^(-|\d)+.?\d*$/;
+            if (!pattern.test(num1) || !pattern.test(num2)){
+                return 'error:数字类型出错';
+            }
+            if (opr == '/'){
+                if (num2 == '0'){
+                    return 'error:除数不能为0';
+                }
+            }
+        }
     </script>
 </body>
 </html>
