@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table>
+        <thead></thead>
+        <tbody>
+        </tbody>
+    </table>
+    <script>
+        let table = document.querySelector("table");
+        for (let i = 1; i <= 9; i++){
+            let tr = document.createElement("tr");
+            let str = '';
+            for (let j = 1; j <= i; j++){
+                str = str + j + '*' + i + '=' + j * i + ' ';
+                let th = document.createElement("th");
+                th.innerText = '' + j + '*' + i + '=' + j*i;
+                tr.appendChild(th);
+            }
+            console.log(str);
+            table.appendChild(tr);
+        }
+    </script>
+</body>
+</html>
