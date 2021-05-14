@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">    
+    <title>IFE ECMAScript</title>
+    <style>
+        .palette {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .palette li {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #000;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>            
+    <ul class="palette">
+        <li style="background-color:crimson"></li>
+        <li style="background-color:bisque"></li>
+        <li style="background-color:blueviolet"></li>
+        <li style="background-color:coral"></li>
+        <li style="background-color:chartreuse"></li>
+        <li style="background-color:darkolivegreen"></li>
+        <li style="background-color:cyan"></li>
+        <li style="background-color:#194738"></li>        
+    </ul>
+
+    <p class="color-picker"></p>
+
+    <script>
+        //正常写法，给每个li添加事件
+        // var list = document.querySelectorAll("li");
+        // for (var i = i = 0, len = list.length; i < len; i++) {
+        //     list[i].onclick = function(e) {
+        //         var t = e.target;
+        //         var c = t.style.backgroundColor;
+        //         var p = document.getElementsByClassName("color-picker")[0]
+        //         p.innerHTML = c;
+        //         p.style.color = c;
+
+        //     }
+        // }
+
+        //事件代理写法
+        let ul = document.querySelector('ul.palette');
+        ul.addEventListener('click', showColor);
+        function showColor(e){
+            let target = e.target;
+            let color = target.style.backgroundColor;
+            let p = document.querySelector('p');
+            p.innerHTML = color;
+            p.style.color = color;
+        }
+    </script>
+</body>
+</html>
