@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var tree = {
+            "id": 0,
+            "name": "root",
+            "left": {
+                "id": 1,
+                "name": "Simon",
+                "left": {
+                    "id": 3,
+                    "name": "Carl",
+                    "left": {
+                        "id": 7,
+                        "name": "Lee",
+                        "left": {
+                            "id": 11,
+                            "name": "Fate"
+                        }
+                    },
+                    "right": {
+                        "id": 8,
+                        "name": "Annie",
+                        "left": {
+                            "id": 12,
+                            "name": "Saber"
+                        }
+                    }
+                },
+                "right": {
+                    "id": 4,
+                    "name": "Tony",
+                    "left": {
+                        "id": 9,
+                        "name": "Candy"
+                    }
+                }
+            },
+            "right": {
+                "id": 2,
+                "name": "right",
+                "left": {
+                    "id": 5,
+                    "name": "Carl",
+                },
+                "right": {
+                    "id": 6,
+                    "name": "Carl",
+                    "right": {
+                        "id": 10,
+                        "name": "Kai"
+                    }        
+                }
+            }
+        }
+
+        // 假设id和name均不会重复，根据输入name找到对应的id
+        function findIdByName(name) {
+            let q = [];
+            q.push(tree);
+            while (q.length){
+                let node = q.pop();
+                if (node == null){
+                    continue;
+                }
+                if (node['name'] == name){
+                    return node.id;
+                }else{
+                    q.push(node['left']);
+                    q.push(node['right']);
+                }
+            }
+        }
+        console.log(findIdByName('root'));
+        console.log(findIdByName('Simon'));
+        console.log(findIdByName('Carl'));
+
+        // 假设id和name均不会重复，根据输入id找到对应的name
+        function findNameById(id) {
+            let q = [];
+            q.push(tree);
+            while (q.length){
+                let node = q.pop();
+                if (node == null){
+                    continue;
+                }
+                if (node['id'] == id){
+                    return node.name;
+                }else{
+                    q.push(node['left']);
+                    q.push(node['right']);
+                }
+            }
+        }
+        console.log(findNameById(0));
+        console.log(findNameById(1));
+        console.log(findNameById(6));
+
+
+        // 把这个对象中所有的名字以“前序遍历”的方式全部输出到console中
+        function getListWithDLR() {
+            printDLR(tree);
+        }
+        function printDLR(node){
+            console.log(node.name);
+            if (node['left'] != null){
+                printDLR(node['left']);
+            }
+            if (node['right'] != null){
+                printDLR(node['right']);
+            }
+        }
+
+        getListWithDLR();
+        console.log('==========');
+
+        // 把这个对象中所有的名字以“中序遍历”的方式全部输出到console中
+        function getListWithLDR() {
+            printLDR(tree);
+        }
+        function printLDR(node){
+            if (node['left'] != null){
+                printLDR(node['left']);
+            }
+            console.log(node.name);
+            if (node['right'] != null){
+                printLDR(node['right']);
+            }
+        }
+
+        getListWithLDR();
+        console.log('===============');
+
+        // 把这个对象中所有的名字以“后序遍历”的方式全部输出到console中
+        function getListWithLRD() {
+            printLRD(tree);
+        }
+        function printLRD(node){
+            if (node['left'] != null){
+                printLRD(node['left']);
+            }
+            if (node['right'] != null){
+                printLRD(node.right);
+            }
+            console.log(node.name);
+        }
+        getListWithLRD();
+        console.log('==============');
+
+    </script>
+</body>
+</html>
