@@ -25,7 +25,7 @@
         inBtn.addEventListener('click', inQueue);
         function inQueue(){
             if (input.value != null && input.value != ''){
-                queue.unshift(input.value);
+                queue.push(input.value);
                 printQueue();
             }
         }
@@ -33,26 +33,19 @@
         outBtn.addEventListener('click', outQueue);
         function outQueue(){
             if (queue.length != 0){
-                queue.shift();
+                queue.pop();
                 printQueue();
             }
         }
 
         function printQueue(){
             p.innerHTML = '队列内容：' + queue.join('->');
-            // for (let i = 0; i < queue.length; i++){
-            //     if (i == 0){
-            //         p.innerHTML += queue[i];
-            //     }else{
-            //         p.innerHTML += '->' + queue[i];
-            //     }
-            // }
         }
 
         let fontBtn = document.querySelector('#font-btn');
         let emptyBtn = document.querySelector('#empty-btn');
         fontBtn.addEventListener('click', function(){
-            console.log(queue[0] ? queue[0] : null);
+            console.log(queue.length > 0 ? queue[queue.length - 1] : null);
         });
         emptyBtn.addEventListener('click', function(){
             console.log(queue.length == 0 ? '队列为空' : '队列不为空');
