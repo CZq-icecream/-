@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id="stack-input" type="text">
+    <p id="stack-cont">栈内容：apple-gt;pear</p>    
+    <button id="push-btn">进栈</button>
+    <button id="pop-btn">退栈</button>
+    <button id="font-btn">打印栈顶元素内容</button>
+    <button id="empty-btn">判断栈是否为空</button>
+
+    <script>
+
+        var stack = ["apple", "pear"];
+
+        let input = document.querySelector('input');
+        let p = document.querySelector('p');
+
+        let pushBtn = document.querySelector('#push-btn');
+        pushBtn.addEventListener('click', push);
+        function push(){
+            if (input.value != null && input.value != ''){
+                stack.push(input.value);
+                p.innerHTML = '栈内容：' + stack.join('->');
+            }
+        }
+        
+        let popBtn = document.querySelector('#pop-btn');
+        popBtn.addEventListener('click', pop);
+        function pop(){
+            stack.pop();
+            p.innerHTML = '栈内容：' + stack.join('->');
+        }
+
+        let fontBtn = document.querySelector('#font-btn');
+        fontBtn.addEventListener('click', function(){
+            console.log(stack.length > 0 ? stack[stack.length - 1] : null);
+        });
+
+        let emptyBtn = document.querySelector('#empty-btn');
+        emptyBtn.addEventListener('click', function(){
+            console.log(stack.length == 0);
+        });
+
+    </script>
+</body>
+</html>
