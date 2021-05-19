@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="cn-date"></p>
+    <p id="en-date"></p>
+
+    <script>
+
+        function getCNDay(date){
+            let day = date.getDay() + 1;
+            switch(day){
+                case 1:
+                    return '星期一';
+                case 2:
+                    return '星期二';
+                case 3:
+                    return '星期三';
+                case 4:
+                    return '星期四';
+                case 5:
+                    return '星期五';
+                case 6:
+                    return '星期六';
+                case 7:
+                    return '星期日';
+            }
+        }
+
+        function getEnDay(date){
+            let day = date.getDay() + 1;
+            switch(day){
+                case 1:
+                    return 'Monday';
+                case 2:
+                    return 'Tuesday';
+                case 3:
+                    return 'Wednesday';
+                case 4:
+                    return 'Thursday';
+                case 5:
+                    return 'Friday';
+                case 6:
+                    return 'Saturday';
+                case 7:
+                    return 'Sunday';
+            }
+        }
+
+        function completionZero(num){
+            return num < 10 ? '0' + num : num;
+        }
+
+        function getCNFormatDate(date){
+            let str = '';
+            str += date.getFullYear() + '年';
+            str += completionZero(date.getMonth() + 1) + '月';
+            str += completionZero(date.getDay()) + '日';
+            str += getCNDay(date);
+            str += completionZero(date.getHours() + 1) + ':';
+            str += completionZero(date.getMinutes() + 1) + ':';
+            str += completionZero(date.getSeconds() + 1);
+            return str;
+        }
+
+        function getENFormatDate(date){
+            let str = '';
+            str += date.getFullYear() + '-';
+            str += completionZero(date.getMonth() + 1) + '-';
+            str += completionZero(date.getDay()) + ' ';
+            str += getEnDay(date) + ' ';
+            str += completionZero(date.getHours() + 1) + ':';
+            str += completionZero(date.getMinutes() + 1) + ':';
+            str += completionZero(date.getSeconds() + 1);
+            return str;
+        }
+        
+        console.log(getCNFormatDate(new Date()));
+
+        function showTime(){
+            let p1 = document.querySelector('#cn-date');
+            let date = new Date();
+            p1.innerHTML = getCNFormatDate(date);
+            let p2 = document.querySelector('#en-date');
+            p2.innerHTML = getENFormatDate(date);
+        }
+        let intervalId = window.setInterval(showTime, 1000);
+
+    </script>
+</body>
+</html>
