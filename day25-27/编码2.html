@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <select id="year-select">
+        <option value="2000">2000</option>
+        <option value="2001">2001</option>
+        <option value="2002">2002</option>
+    </select>
+    
+    <select id="month-select">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="12">12</option>
+    </select>
+    
+    <select id="day-select">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="31">31</option>
+    </select>
+    
+    <select id="hour-select">
+        <option value="0">00</option>
+        <option value="1">01</option>        
+        <option value="23">23</option>
+    </select>
+    
+    <select id="minute-select">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option>59</option>
+    </select>
+    
+    <select id="second-select">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option>59</option>
+    </select>
+    
+    <p id="result-wrapper">现在距离 2001年1月1日星期X HH:MM:SS 还有 X 天 X 小时 X 分 X 秒</p>
+
+    <script>
+        const selects = document.querySelectorAll('select');
+        const p = document.querySelector('p');
+        for (let i = 0; i < selects.length; i++){
+            selects[i].addEventListener('change', function(){
+                let date = getDate();
+                let now = new Date();
+                p.innerHTML = '现在距离' + showSelectTime() + 
+                     showMiddle(now, date) + showDiffTime(now, date);
+            });
+        }
+
+        function showMiddle(now, date){
+            return now < date ? '还有' : '已经过去';
+        }
+
+        function showDiffTime(now, date){
+            let diff = Math.abs(now - date);
+            let day = parseInt(diff / 1000 / 3600 /24); //计算相差的天数
+            let hour = parseInt((diff - day * 1000 * 3600 * 24) / 1000 / 3600);
+            let minute = parseInt((diff - day * 1000 * 3600 * 24 - 
+                hour * 1000 * 3600) / 1000 / 60);
+            let second = parseInt((diff - day * 1000 * 3600 * 24 - 
+                hour * 1000 * 3600 - minute * 1000 * 60) / 1000);
+            return day + '天' + hour + '小时' + minute + '分' + second + '秒';
+        }
+
+        //根据下拉框选中的值获取日期
+        function getDate(){
+            let year = getSelectValue('#year-select');
+            let month = getSelectValue('#month-select');
+            let day = getSelectValue('#day-select');
+            let hour = getSelectValue('#hour-select');
+            let minute = getSelectValue('#minute-select');
+            let second = getSelectValue('#second-select');
+            
+            let date = new Date();
+            date.setFullYear(year);
+            date.setMonth(month);
+            date.setDate(day);
+            date.setHours(hour);
+            date.setMinutes(minute);
+            date.setSeconds(second);
+            return date;
+        }
+
+        //根据下拉框选中的值拼出时间
+        function showSelectTime(){
+            let date = getDate();
+            return date.getFullYear() + '年' + date.getMonth() + '月' + 
+                date.getDate() + '日' + getWeekDay(date) + ' '+ 
+                complementZero(date.getHours()) + ':' + 
+                complementZero(date.getMinutes()) + ':' + 
+                complementZero(date.getSeconds());
+        }
+
+        //输入下拉框Id获取选中的值
+        function getSelectValue(selectId){
+            let selectOptions = document.querySelectorAll(selectId + ' option');
+            return selectOptions[document.querySelector(selectId).selectedIndex].value;
+        }
+
+        function getWeekDay(date){
+            switch(date.getDay() + 1){
+                case 1: return '星期一';
+                case 2: return '星期二';
+                case 3: return '星期三';
+                case 4: return '星期四';
+                case 5: return '星期五';
+                case 6: return '星期六';
+                case 7: return '星期日';
+            }
+        }
+        
+        function complementZero(num){
+            return num < 10 ? '0' + num : num;
+        }
+    </script>
+</body>
+</html>

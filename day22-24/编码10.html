@@ -28,11 +28,13 @@
         function objToArrayRec(obj){
             let result = [];
             for (let key in obj){
+                let tmpArray = [];
                 if (typeof obj[key] == 'object'){
-                    result.concat(objToArray(obj[key]));
+                    tmpArray = tmpArray.concat(objToArray(obj[key]));
                 }else{
-                    result.push(obj[key]);
+                    tmpArray.push(obj[key]);
                 }
+                result = result.concat(tmpArray);
             }
             return result;
         }
@@ -42,7 +44,7 @@
             for (let key in scoreObject){
                 let tmpArray = [];
                 tmpArray.push(key);
-                if (typeof scoreObject[key] == 'object'){
+                if (typeof scoreObject[key]){
                     tmpArray = tmpArray.concat(objToArrayRec(scoreObject[key]));
                 }else{
                     tmpArray.push(scoreObject[key]);
@@ -51,7 +53,6 @@
             }
             return result;
         }
-
         console.log(objToArray());
 
         var menuArr = [
@@ -64,18 +65,37 @@
             [7, "Area1-2-3", 4],
             [8, "Area2-2-1", 6],
         ];
-        function arrayToObj(){
-            let menuObj = {};
+        let menuObj = {};
+
+        function arrToObject(){
             for (let i = 0; i < menuArr.length; i++){
-                if (typeof menuArr[i] == 'Array'){
-                    arrayToObj.
+                let arr = menuArr[i];
+                if (!arrToObjectRec(menuObj, arr)){
+                    menuObj[arr[0]] = {};
+                    msenuObj[arr[0]].name = arr[1];
                 }
             }
         }
-        function arrayToObjRec(arr){
-
+        function arrToObjectRec(obj, arr){
+            for (let key in obj){
+                if (key == arr[2]){//当前节点为arr的父节点
+                    if (obj[key].subMenu == null){
+                        obj[key].subMenu = {};
+                    }
+                    obj[key].subMenu[arr[0]] = {};
+                    obj[key].subMenu[arr[0]].name = arr[1];
+                    return true;
+                }
+                if (obj[key].subMenu != null){//继续往子节点找
+                    if (arrToObjectRec(obj[key].subMenu, arr)){
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
-
+        arrToObject();
+        console.log(menuObj);
 
     </script>
 </body>
