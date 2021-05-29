@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .wrapper *{
+            margin: 0;
+            padding: 0;
+            vertical-align: middle;
+            width: 150px;
+        }
+
+        input{
+            margin-bottom: 0px;
+            /* display: block; */
+            height: 25px;
+        }
+
+        .wrapper li{
+            list-style-type: none;
+            vertical-align: middle;
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+
+        .email-sug{
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            color: gray;
+            height: 22px; /*设定了高度之后就不会因为往ul中添加子元素挤占其它元素的空间*/
+            line-height: 22px;
+            font-size: 14px;
+            z-index: 10;
+        }
+
+        .email-sug li:hover{
+            background-color: lightblue;
+            cursor: pointer;
+        }
+
+        .selected{
+            background-color: lightblue;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <input id="email-input" type="text">
+        <ul id="email-sug-wrapper" class="email-sug">
+        </ul>
+    </div>
+
+    <script>
+        // 邮箱后缀List参考
+        var postfixList = ['163.com', 'gmail.com', '126.com', 'qq.com', '263.net'];
+        
+        let ul = document.querySelector('ul');
+        let input = document.querySelector('input');
+
+        let sugList = []; //ul的内容
+        let currentIndex = 0; //当前选中的列表的下标
+
+        //失去焦点时清空列表
+        //但是如果清空的话就无法触发li的点击事件
+        input.addEventListener('blur', function(){
+            // console.log('input blur event');
+        });
+
+        //用户输入事件
+        input.addEventListener('input', function(event){
+            console.log('input input event');
+            // //获取用户输入，生成提示框中的提示内容，将提示内容添加到email-sug-wrapper中
+            // //获取用户输入
+            // let str = getInputValue();
+            // console.log('input:' + str);
+            // if (str == null || str == ''){
+            //     hide();
+            // }else{
+            //     show();
+            // }
+            // //获取要显示在列表的内容
+            // getUlValue(str);
+            // //显示在列表中
+            // addLi();
+        });
+
+        //keyup事件的event对象有keycode属性
+        input.addEventListener('keyup', function(event){
+            console.log('input keyup event');
+            console.log(event.keyCode);
+            //获取用户输入，生成提示框中的提示内容，将提示内容添加到email-sug-wrapper中
+            //获取用户输入
+            let str = getInputValue();
+            console.log('input:' + str);
+            if (str == null || str == ''){
+                hide();
+            }else{
+                show();
+            }
+            //获取要显示在列表的内容
+            getUlValue(str);
+            //显示在列表中
+            addLi();
+            switch(event.keyCode){
+                case 38: //按上键
+                    currentIndex -= 1;
+                    if (currentIndex < 0){
+                        currentIndex = -1;
+                    }
+                    break;
+                case 40: //按下键
+                    currentIndex += 1;
+                    if (currentIndex >= sugList.length){
+                        currentIndex = sugList.length - 1;
+                    }
+                    break;
+                case 13: //按回车
+                    if (currentIndex >= 0 && currentIndex < sugList.length){
+                        input.value = ul.childNodes[currentIndex].innerHTML;
+                    }
+                    hide();
+                    break;
+            }
+            console.log(currentIndex);
+            if (currentIndex >= 0 && currentIndex < sugList.length){
+                ul.childNodes[currentIndex].className = 'selected';
+            }
+        });
+
+        //隐藏列表
+        function hide(){    
+            console.log('hide');
+            ul.style.visibility = "hidden";
+        }
+        //显示列表
+        function show(){
+            console.log('show');
+            ul.style.visibility = "visible";
+        }
+
+        //获取用户输入
+        function getInputValue(){
+            return input.value.trim();
+        }
+
+        //生成提示框中的提示内容
+        function getUlValue(str){
+            sugList = [];
+            let end = str.indexOf('@');
+            if (end == -1){
+                for (let i = 0; i < postfixList.length; i++){
+                    sugList.push(str + '@' + postfixList[i]);
+                }
+            }else{
+                let postfix = str.substring(end + 1);
+                for (let i = 0; i < postfixList.length; i++){
+                    if (postfixList[i].indexOf(postfix) != -1)
+                    sugList.push(str.substring(0, end + 1) + postfixList[i]);
+                }
+            }
+        }
+
+        //清空li列表的内容
+        function clearLi(){
+            let len = ul.childNodes.length;
+            for (let i = len - 1; i >= 0; i--){
+                ul.removeChild(ul.childNodes[i]);
+            }
+        }
+        //将提示内容加到emial-sug-wrapper
+        function addLi(){
+            clearLi();
+            for (let i = 0; i < sugList.length; i++){
+                let li = document.createElement('li');
+                li.innerHTML = sugList[i];
+                ul.appendChild(li);
+            }
+        }
+
+        ul.addEventListener('click', function(event){
+            console.log('ul click event');
+            if (event.target.nodeName.toLowerCase() == 'li'){
+                input.value = event.target.innerHTML;
+                hide();
+            }
+        });
+    </script>
+</body>
+</html>

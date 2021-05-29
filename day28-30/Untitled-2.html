@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+ 
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>原生JS实现登录框提示</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+ 
+        body {
+            font: 12px/1.125 Arial, Helvetica, sans-serif;
+        }
+ 
+        li {
+            list-style: none;
+        }
+ 
+        #login {
+            width: 252px;
+            height: 385px;
+            /* 彩色背景图 */
+            background: url(images/0.jpg) no-repeat;
+            margin: 20px auto;
+            position: relative;
+        }
+ 
+        .detail {
+            margin: 0 0 5px 30px;
+            position: relative;
+            top: 110px;
+        }
+ 
+        .detail input {
+            color: #999999;
+            border: 1px solid #74C8E5;
+            border-radius: 3px 3px 3px 3px;
+            height: 15px;
+            line-height: 14px;
+            padding: 8px 5px 7px;
+            width: 184px;
+        }
+ 
+        #suggest {
+            background: none repeat scroll 0 0 #FFFFFF;
+            border: 1px solid #CCCCCC;
+            left: 30px;
+            margin: 0;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            text-align: left;
+            top: 142px;
+            visibility: visible;
+            width: 194px;
+            z-index: 1;
+            display: none;
+        }
+ 
+        .note,
+        .item {
+            clear: both;
+            color: #999999;
+            cursor: pointer;
+            font-size: 12px;
+            height: 20px;
+            line-height: 20px;
+            list-style: none outside none;
+            margin: 0 1px;
+            padding: 0 5px;
+            white-space: nowrap;
+        }
+ 
+        .active {
+            white-space: nowrap;
+            clear: both;
+            color: rgb(153, 153, 153);
+            cursor: pointer;
+            font-size: 12px;
+            height: 20px;
+            line-height: 20px;
+            list-style: none outside none;
+            margin: 0pt 1px;
+            padding: 0pt 5px;
+            background: none repeat scroll 0% 0% rgb(232, 244, 252);
+        }
+    </style>
+    <script>
+ 
+        //页面加载完成时
+        window.onload = function () {
+            //创建构造函数
+            var s1 = new Suggest();
+            //初始化
+            s1.init();
+        };
+ 
+        //构造函数
+        function Suggest() {
+            //获取用户名输入框
+            this.oInput = document.getElementById('input1');
+            //获取下拉列表提示框
+            this.oUl = document.getElementById('suggest');
+            //获取下拉列表项
+            this.aLi = this.oUl.getElementsByTagName('li');
+        }
+ 
+        //为构造函数添加原型方法
+        Suggest.prototype = {
+            //初始化时
+            init: function () {
+                // 输入改变时
+                this.toChange();
+                // 光标移开时
+                this.toBlur();
+            },
+            //边续触发改变时
+            toChange: function () {
+ 
+                //添加连续输入事件，并兼容各浏览器
+                var ie = !-[1,];
+                var This = this;
+ 
+                if (ie) {
+                    this.oInput.onpropertychange = function () {
+                        //防止在IE下输入值为空的时候，触发下拉提示框
+                        if (This.oInput.value == '') {
+                            This.tips();
+                            return;
+                        }
+                        //显示下拉列表框
+                        This.thowUl();
+                        //显示提示
+                        This.tips();
+                        //输入时的默认选中
+                        This.sel(0);
+                    };
+                } else {
+                    this.oInput.oninput = function () {
+                        //显示下拉列表框
+                        This.thowUl();
+                        //显示提示
+                        This.tips();
+                        //输入时的默认选中
+                        This.sel(0);
+                    };
+                }
+            },
+            //显示下拉列表框
+            thowUl: function () {
+                this.oUl.style.display = 'block';
+            },
+            //光标移开时，隐藏下拉担示框
+            toBlur: function () {
+                var This = this;
+                this.oInput.onblur = function () {
+                    This.oUl.style.display = 'none';
+                };
+            },
+ 
+            //输入时，提示内空相应改变
+            tips: function () {
+                var value = this.oInput.value;
+ 
+                //定义邮箱正则（@加上@后面输入的值加空格)
+                var re = new RegExp('@' + value.substring(value.indexOf('@') + 1) + '');
+ 
+                //初始化显示下拉列表
+                //防止清空输入后不显示下拉列表
+                for (var i = 1; i < this.aLi.length; i++) {
+                    this.aLi[i].style.display = 'block';
+                    this.aLi[i].bBtn = true;
+                }
+ 
+                if (re.test(value)) {
+                    //获取所有li的自定义属性(除开第一个)
+                    for (var i = 1; i < this.aLi.length; i++) {
+                        var oEmail = this.aLi[i].getAttribute('email');
+                        //为选中的第1个li直接赋值
+                        if (i == 1) {
+                            //将输入值赋给li
+                            this.aLi[i].innerHTML = value;
+ 
+                        } else {
+                            if (re.test(oEmail)) {
+                                this.aLi[i].style.display = 'block';
+                                this.aLi[i].bBtn = true;
+                            } else {
+                                this.aLi[i].style.display = 'none';
+                                this.aLi[i].bBtn = false;
+                            }
+                        }
+                    }
+                } else {
+                    //获取所有li的自定义属性(除开第一个)
+                    for (var i = 1; i < this.aLi.length; i++) {
+                        var oEmail = this.aLi[i].getAttribute('email');
+                        //如果获取的oEmail值为空时，即为第一个时
+                        if (!oEmail) {
+                            //将输入值赋给li
+                            this.aLi[i].innerHTML = value;
+                        } else {
+                            //li的内容为输入值加上其属性值
+                            this.aLi[i].innerHTML = value + oEmail;
+                        }
+                    }
+                }
+            },
+            //提示列表项选中方法
+            sel: function (iNow) {
+ 
+                var This = this;
+                var arr = [];
+ 
+                //选中一个提示后，重新输入时，将选中项还原为默认样式
+                for (var i = 1; i < this.aLi.length; i++) {
+                    this.aLi[i].className = 'item';
+                    if (this.aLi[i].bBtn) {
+                        arr.push(this.aLi[i]);
+                    }
+                }
+ 
+                //当输入内容为空时
+                if (this.oInput.value == '') {
+                    //样式为item
+                    arr[iNow].className = 'item';
+                    //当输入内容不为空时
+                } else {
+                    //样式为active
+                    arr[iNow].className = 'active';
+                }
+ 
+ 
+                //为所有的下拉提示添加鼠标移入事件
+                for (var i = 1; i < arr.length; i++) {
+                    arr[i].index = i;
+                    //鼠标移入时
+                    arr[i].onmouseover = function () {
+                        //将所有li的样式还原为默认样式
+                        for (var i = 1; i < This.aLi.length; i++) {
+ 
+                            This.aLi[i].className = 'item';
+                        }
+                        //为当前选项添加样式为active
+                        this.className = 'active';
+                        iNow = this.index;
+                    };
+ 
+                    //鼠标点击时，将当前的提示选项内容替换为输入值
+                    arr.onmousedown = function () {
+                        This.oInput.value = this.innerHTML;
+                    };
+                }
+ 
+                //添加键盘事件
+                document.onkeydown = function (ev) {
+                    //做事件兼容
+                    var ev = ev || window.event;
+                    //上
+                    if (ev.keyCode == 38) {
+                        if (iNow == 0) {
+                            iNow = arr.length - 1;
+                        } else {
+                            iNow--;
+                        }
+                        for (var i = 1; i < This.aLi.length; i++) {
+                            This.aLi[i].className = 'item';
+                        }
+                        arr[iNow].className = 'active';
+                        //下	
+                    } else if (ev.keyCode == 40) {
+                        //当iNow为最后一个时，赋值为0
+                        if (iNow == arr.length - 1) {
+                            iNow = 0;
+                        } else {
+                            iNow++;
+                        }
+                        //清空所有li样式为默认样式
+                        for (var i = 1; i < This.aLi.length; i++) {
+                            This.aLi[i].className = 'item';
+                        }
+                        //为当前选项添加active样式
+                        arr[iNow].className = 'active';
+                        //回车
+                    } else if (ev.keyCode == 13) {
+                        //将当前的提示选项内容替换为输入值
+                        This.oInput.value = arr[iNow].innerHTML;
+                        //将光标移开输入框，关闭下拉列表项
+                        This.oInput.blur();
+                    }
+                };
+ 
+            }
+        };
+    </script>
+</head>
+ 
+<body>
+    <div id="login">
+ 
+        <div class="detail">
+            <input id="input1" type="text" maxlength="128" placeholder="邮箱/会员帐号/手机号" autocomplete="off"
+                node-type="loginname" class="name" tabindex="1" name="loginname">
+        </div>
+ 
+        <div class="detail">
+            <input type="password" maxlength="24" placeholder="请输入密码" node-type="password" class="pass" tabindex="2"
+                name="password">
+        </div>
+ 
+        <ul id="suggest">
+            <li class="note">请选择邮箱类型</li>
+            <li email="" class="item"></li>
+            <li email="@sina.com" class="item">@sina.com</li>
+            <li email="@163.com" class="item">@163.com</li>
+            <li email="@qq.com" class="item">@qq.com</li>
+            <li email="@126.com" class="item">@126.com</li>
+            <li email="@vip.sina.com" class="item">@vip.sina.com</li>
+            <li email="@sina.cn" class="item">@sina.cn</li>
+            <li email="@hotmail.com" class="item">@hotmail.com</li>
+            <li email="@gmail.com" class="item">@gmail.com</li>
+            <li email="@sohu.com" class="item">@sohu.com</li>
+            <li email="@yahoo.cn" class="item">@yahoo.cn</li>
+            <li email="@139.com" class="item">@139.com</li>
+            <li email="@wo.com.cn" class="item">@wo.com.cn</li>
+            <li email="@189.cn" class="item">@189.cn</li>
+        </ul>
+    </div>
+</body>
+ 
+</html>
+————————————————
+版权声明：本文为CSDN博主「aiguangyuan」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/weixin_40629244/article/details/97620798
